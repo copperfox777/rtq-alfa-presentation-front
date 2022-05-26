@@ -14,6 +14,16 @@ export const api = createApi({
         }
       },
     }),
+    getPosts: builder.query({
+      queryFn: async (arg) => {
+        try {
+          const response = await fetch(url + `posts/${arg}`);
+          return { data: await response.json() };
+        } catch (e) {
+          return { error: "Something bad happened" };
+        }
+      },
+    }),
   }),
 });
 

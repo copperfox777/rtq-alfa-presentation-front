@@ -5,7 +5,7 @@ export function UserCard(props: { user: IUser; disabled?: boolean }) {
   const navigate = useNavigate();
   return (
     <div
-      className={cl("card h-32",props.disabled && "opacity-50")}
+      className={cl("card h-32 cursor-pointer",props.disabled && "opacity-50")}
       onClick={() => navigate(`/user/${props.user.id}`)}
     >
       <div className="grid grid-flow-col">
