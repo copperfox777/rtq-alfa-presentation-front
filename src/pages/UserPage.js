@@ -17,7 +17,11 @@ export function UserPage() {
     isLoading,
     isFetching,
     refetch: refetchPosts,
-  } = useGetPostsQuery(+id, { pollingInterval: 3000 });
+  } = useGetPostsQuery(+id, {
+    refetchOnReconnect: true,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  });
 
   const { refetch: refetchUser } = useGetUserQuery(+id);
 

@@ -13,6 +13,7 @@ export const api = createApi({
           return { error: e.message };
         }
       },
+      keepUnusedDataFor:5,
     }),
     getPosts: builder.query({
       queryFn: async (arg) => {
