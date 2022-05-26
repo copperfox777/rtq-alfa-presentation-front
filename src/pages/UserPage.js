@@ -1,15 +1,20 @@
 import {useParams} from "react-router-dom";
-import {useGetPostsQuery} from "redux/api";
+import {useGetPostsQuery} from "../redux/api";
 import {PostCard} from "../components/Views/PostCard";
 import {Error} from "../components/Views/Error";
 import {Loading} from "../components/Views/Loading";
 import {Title} from "../components/Views/Title";
 import {User} from "../components/User";
+import {useEffect} from "react";
 
 export function UserPage() {
 
   const { id } = useParams();
-  const {data: posts, isError: errPosts, isFetching: loadingPosts} = useGetPostsQuery(+id);
+  const {data: posts, isError, isFetching,refetch} = useGetPostsQuery(+id);
+
+    useEffect(() => {
+        if (isError) refetch();
+    }, [isError]);
 
   return (
     <div className="m-10">
@@ -18,10 +23,10 @@ export function UserPage() {
       </div>
       <User id={id}/>
       <div className="my-10">
-        {loadingPosts && <Loading/>}
-        {errPosts && <Error/>}
-        {!loadingPosts &&
-            !errPosts &&
+        {isFetching && <Loading/>}
+        {isError && <Error/>}
+        {!isFetching &&
+            !isError &&
             posts?.map((post) => (
                 <PostCard key={post.id} post={post}/>
             ))}
