@@ -1,4 +1,4 @@
-import { useGetUserQuery } from "redux/rtk";
+import { useGetUserQuery } from "redux/api";
 import { Loading } from "./Views/Loading";
 import { Error } from "./Views/Error";
 import { UserCard } from "./Views/UserCard";

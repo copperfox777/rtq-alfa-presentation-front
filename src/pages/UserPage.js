@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useGetPostsQuery, useGetUserQuery} from "redux/rtk";
+import {useGetPostsQuery, useGetUserQuery} from "redux/api";
 import {useEffect} from "react";
 import {Button} from "components/Views/Button";
 import {PostCard} from "../components/Views/PostCard";

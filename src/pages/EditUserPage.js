@@ -3,7 +3,7 @@ import {
   useGetUserQuery,
   useGetPostsQuery,
   useUpdateUserMutation,
-} from "redux/rtk";
+} from "redux/api";
 import { useEffect, useState, useRef } from "react";
 import { Button } from "components/Views/Button";
 import { toast, ToastContainer } from "react-toastify";
