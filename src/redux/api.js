@@ -1,8 +1,8 @@
-import {createApi, fetchBaseQuery, retry} from "@reduxjs/toolkit/query/react";
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: retry(fetchBaseQuery({baseUrl: "http://localhost:7070/api/"}), {maxRetries: 5}),
+  baseQuery: fetchBaseQuery({baseUrl: "http://localhost:7070/api/"}),
   endpoints: (builder) => ({
     getUser: builder.query({
       query: (arg) => `users/${arg}`,
@@ -18,7 +18,17 @@ export const api = createApi({
         method: 'POST',
         body,
       }),
-      invalidatesTags: (result, error, {id}) => [{type: "Users", id}],
+      // invalidatesTags: (result, error, {id}) => [{type: "Users", id}],
+      async onQueryStarted({id, ...body}, {dispatch, queryFulfilled}) {
+        console.log(id)
+        const patchResult = dispatch(
+            api.util.updateQueryData('getUser', +id, (draft) => Object.assign(draft, body)))
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        }
+      },
     }),
   }),
 });

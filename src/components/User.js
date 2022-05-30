@@ -13,6 +13,6 @@ export function User({id, isMutating}) {
 
   if (isFetching && !user) return <Loading/>;
   if (isError) return <Error/>;
-  if (user) return <UserCard user={user} disabled={isFetching}/>;
+  if (user) return <UserCard user={user} disabled={isFetching || isMutating}/>;
   return null;
 }
