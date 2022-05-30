@@ -1,25 +1,19 @@
-import { useParams } from "react-router-dom";
-import {
-  useGetUserQuery,
-  useGetPostsQuery,
-  useUpdateUserMutation,
-} from "redux/api";
-import { useEffect, useState, useRef } from "react";
-import { Button } from "components/Views/Button";
-import { toast, ToastContainer } from "react-toastify";
-import { UserRTQ } from "../components/UserRTQ";
-import { Title } from "../components/Views/Title";
-import * as PropTypes from "prop-types";
+import {useParams} from "react-router-dom";
+import {useGetUserQuery, useUpdateUserMutation,} from "redux/api";
+import {useEffect, useRef, useState} from "react";
+import {Button} from "components/Views/Button";
+import {Title} from "../components/Views/Title";
+import {User} from "../components/User";
 
 function EditUser(props) {
-  const idRef = useRef();
-  const nameRef = useRef();
-  const jobRef = useRef();
+    const idRef = useRef();
+    const nameRef = useRef();
+    const jobRef = useRef();
 
-  const {
-    data: user,
-    isError,
-    isFetching,
+    const {
+        data: user,
+        isError,
+        isFetching,
     refetch: refetchUser,
   } = useGetUserQuery(+props.id, {
     skip: !props.id,
@@ -79,8 +73,7 @@ export function EditUserPage() {
       <div className="flex gap-10 justify-end mb-10"></div>
 
       <div className="flex gap-10 flex-col">
-        <UserRTQ id={id} isMutating={isMutating} />
-        <UserRTQ id={1} />
+          <User id={id} isMutating={isMutating}/>
       </div>
 
       <EditUser id={id} setId={setId} updateUser={updateUser} />

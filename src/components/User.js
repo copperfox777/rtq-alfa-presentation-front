@@ -3,9 +3,9 @@ import {Loading} from "./Views/Loading";
 import {UserCard} from "./Views/UserCard";
 import {useGetUserQuery} from "../redux/api";
 
-export function User({ id }) {
+export function User({id, isMutating}) {
 
-  const {currentData: user, isError, isFetching, refetch} = useGetUserQuery(+id);
+  const {currentData: user, isError, isFetching} = useGetUserQuery(+id);
 
   // useEffect(() => {
   //   if (isError) refetch();
