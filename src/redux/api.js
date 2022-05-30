@@ -1,32 +1,16 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-const url = "http://localhost:7070/api/";
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
   reducerPath: "api",
+  baseQuery: fetchBaseQuery({baseUrl: "http://localhost:7070/api/"}),
   endpoints: (builder) => ({
     getUser: builder.query({
-      queryFn: async (arg) => {
-        try {
-          const response = await fetch(url + `users/${arg}`);
-          return { data: await response.json() };
-        } catch (e) {
-          return { error: e.message };
-        }
-      },
-      keepUnusedDataFor:5,
+      query: (arg) => `users/${arg}`,
     }),
     getPosts: builder.query({
-      queryFn: async (arg) => {
-        try {
-          const response = await fetch(url + `posts/${arg}`);
-          return { data: await response.json() };
-        } catch (e) {
-          return { error: "Something bad happened" };
-        }
-      },
+      query: async (arg) => `posts/${arg}`,
     }),
   }),
 });
 
-export const { useGetUserQuery, useGetPostsQuery, useUpdateUserMutation } =
-  api;
+export const {useGetUserQuery, useGetPostsQuery, useUpdateUserMutation} = api;
