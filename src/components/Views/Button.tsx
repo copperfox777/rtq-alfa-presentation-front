@@ -1,8 +1,8 @@
 export function Button(props: {
   title: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onClick?: () => void;
-  className: string;
+  className?: string;
 }) {
   return (
     <button
@@ -13,7 +13,7 @@ export function Button(props: {
         props.className
       }
     >
-      {props.title || props.children}
+      {props.title || props.children || "Button"}
     </button>
   );
 }
